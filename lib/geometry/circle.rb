@@ -2,18 +2,20 @@ require_relative 'ffi/circle'
 
 module Geometry
   class Circle
-    attr_accessor :radius
-
     def initialize(radius)
-      @radius = radius
+      @ptr = FFI::Circle.circle_make(radius)
     end
 
     def area
-      FFI::Circle.area_circle(as_pointer)
+      FFI::Circle.circle_area(@ptr)
     end
 
-    def as_pointer
-      FFI::Circle.make_circle(@radius)
+    def radius
+      FFI::Circle.circle_get_radius(@ptr)
+    end
+
+    def radius=(radius_to_set)
+      FFI::Circle.circle_set_radius(@ptr, radius_to_set)
     end
   end
 end
