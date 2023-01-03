@@ -52,3 +52,9 @@ module Sequence
     end
   end
 end
+
+class Integer
+  def aliquot_sequence
+    Sequence::AliquotSequence.new(self)
+  end
+end

@@ -54,8 +54,4 @@ class Integer
   def prime?
     proper_divisors == [1]
   end
-
-  def aliquot_sequence
-    Sequence::AliquotSequence.new(self)
-  end
 end
