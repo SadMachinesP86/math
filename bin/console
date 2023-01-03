@@ -2,7 +2,8 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require_relative '../lib/geometry'
+require_relative '../lib/math'
+require 'byebug'
 
 require 'irb'
 IRB.start(__FILE__)
