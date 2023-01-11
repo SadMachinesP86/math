@@ -1,12 +1,17 @@
-#[no_mangle]
-pub extern fn integer_proper_divisors(int: u32) -> Vec<u32> {
-    let mut proper_divisors: Vec<u32> = Vec::new();
+use magnus::{define_global_function, function, Error};
 
-    for potential_divisor in 1..int/2 {
-        if int % potential_divisor == 0 {
-            proper_divisors.push(potential_divisor)
-        }
-    }
+fn proper_divisors(int: u32) -> Vec<u32> {
+    (1..(int/2 + 1)).into_iter()
+                    .filter( |potential_divisor| int % potential_divisor == 0)
+                    .collect()
+}
 
-    proper_divisors
+fn aliquot_sum(int: u32) -> u32 {
+    proper_divisors(int).iter().sum()
+}
+
+pub fn expose() -> Result<(), Error> {
+    define_global_function("_rust_proper_divisors", function!(proper_divisors, 1));
+    define_global_function("_rust_aliquot_sum", function!(aliquot_sum, 1));
+    Ok(())
 }

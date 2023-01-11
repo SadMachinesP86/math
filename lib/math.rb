@@ -1,5 +1,3 @@
-# require_relative 'geometry'
-# require_relative 'integer/divisors'
-# require_relative 'sequence'
-
 require_relative 'math/math'
+require_relative 'integer/divisors'
+require_relative 'sequence'

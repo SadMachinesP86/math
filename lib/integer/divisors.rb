@@ -4,15 +4,11 @@ class Integer
   end
 
   def proper_divisors
-    (1..(self/2)).select { |i| i.factor_of? self }
-  end
-
-  def divisors
-    proper_divisors.push self
+    _rust_proper_divisors(self)
   end
 
   def aliquot_sum
-    proper_divisors.sum
+    _rust_aliquot_sum(self)
   end
 
   def aliquot_classification
