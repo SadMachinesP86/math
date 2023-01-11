@@ -1,3 +1,4 @@
-/target
-/Cargo.lock
+tmp
+lib/math/math.so
+ext/math/target
 .byebug_history

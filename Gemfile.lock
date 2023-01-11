@@ -10,6 +10,9 @@ GEM
       ast (~> 2.4.1)
     rainbow (3.1.1)
     rake (13.0.6)
+    rake-compiler (1.2.1)
+      rake
+    rb_sys (0.9.54)
     regexp_parser (2.6.1)
     rexml (3.2.5)
     rspec (3.12.0)
@@ -45,7 +48,8 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  rake (~> 13.0)
+  rake-compiler
+  rb_sys
   rspec (~> 3.0)
   rubocop (~> 1.21)
 
