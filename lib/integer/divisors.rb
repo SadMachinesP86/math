@@ -3,14 +3,6 @@ class Integer
     other % self == 0
   end
 
-  def proper_divisors
-    _rust_proper_divisors(self)
-  end
-
-  def aliquot_sum
-    _rust_aliquot_sum(self)
-  end
-
   def aliquot_classification
     as = aliquot_sum
 

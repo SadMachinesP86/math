@@ -1,6 +1,6 @@
-use magnus::{define_class, function, method, prelude::*, Error};
+use magnus::{function, method, prelude::*, Error, RModule};
 
-#[magnus::wrap(class = "Circle")]
+#[magnus::wrap(class = "Geometry::Circle")]
 struct Circle {
     radius: f32,
 }
@@ -14,15 +14,15 @@ impl Circle {
         std::f32::consts::PI * (self.radius.powf(2.0))
     }
 
-    fn radius(&self) -> f32 {
+    fn get_radius(&self) -> f32 {
         self.radius
     }
 }
 
-pub fn expose() -> Result<(), Error> {
-    let class = define_class("Circle", Default::default())?;
+pub fn expose(module: RModule) -> Result<(), Error> {
+    let class = module.define_class("Circle", Default::default())?;
     class.define_singleton_method("new", function!(Circle::new, 1))?;
     class.define_method("area", method!(Circle::area, 0))?;
-    class.define_method("radius", method!(Circle::radius, 0))?;
+    class.define_method("radius", method!(Circle::get_radius, 0))?;
     Ok(())
 }

@@ -1,4 +1,4 @@
-use magnus::{define_global_function, function, Error};
+use magnus::{Error, class, Module, method};
 
 fn proper_divisors(int: u32) -> Vec<u32> {
     (1..(int/2 + 1)).into_iter()
@@ -11,7 +11,7 @@ fn aliquot_sum(int: u32) -> u32 {
 }
 
 pub fn expose() -> Result<(), Error> {
-    define_global_function("_rust_proper_divisors", function!(proper_divisors, 1));
-    define_global_function("_rust_aliquot_sum", function!(aliquot_sum, 1));
+    class::integer().define_method("proper_divisors", method!(proper_divisors, 0))?;
+    class::integer().define_method("aliquot_sum", method!(aliquot_sum, 0))?;
     Ok(())
 }

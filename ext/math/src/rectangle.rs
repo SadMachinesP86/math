@@ -1,6 +1,6 @@
-use magnus::{define_class, function, method, prelude::*, Error};
+use magnus::{function, method, prelude::*, Error, RModule};
 
-#[magnus::wrap(class = "Rectangle")]
+#[magnus::wrap(class = "Geometry::Rectangle")]
 struct Rectangle {
     width: f32,
     height: f32
@@ -15,20 +15,20 @@ impl Rectangle {
         self.width * self.height
     }
 
-    fn width(&self) -> f32 {
+    fn get_width(&self) -> f32 {
         self.width
     }
 
-    fn height(&self) -> f32 {
+    fn get_height(&self) -> f32 {
         self.height
     }
 }
 
-pub fn expose() -> Result<(), Error> {
-    let class = define_class("Rectangle", Default::default())?;
+pub fn expose(module: RModule) -> Result<(), Error> {
+    let class = module.define_class("Rectangle", Default::default())?;
     class.define_singleton_method("new", function!(Rectangle::new, 2))?;
     class.define_method("area", method!(Rectangle::area, 0))?;
-    class.define_method("width", method!(Rectangle::width, 0))?;
-    class.define_method("height", method!(Rectangle::height, 0))?;
+    class.define_method("width", method!(Rectangle::get_width, 0))?;
+    class.define_method("height", method!(Rectangle::get_height, 0))?;
     Ok(())
 }
